@@ -1,0 +1,55 @@
+@*
+ * This template is called from the `index` template. This template
+ * handles the rendering of the page header and body tags. It takes
+ * two arguments, a `String` for the title of the page and an `Html`
+ * object to insert into the body of the page.
+ *@
+@(title: String)(content: Html)
+
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-COMPATIBLE" content="IE=edge">
+        <meta name="viewport" content="width=device-width, intial-scale=1">
+
+        @* Here's where we render the page title `String`. *@
+        <title>@title - PlayFramework Sample</title>
+        <link href="@routes.Assets.versioned("lib/bootstrap/css/bootstrap.min.css")" rel="stylesheet">
+        <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/main.css")">
+    </head>
+    <body>
+        <header class="navbar navbar-fixed-top navbar-inverse">
+            <div class="container">
+                <a href="@routes.StaticPageController.home()" id="logo">Sample app</a>
+                <nav>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="@routes.StaticPageController.home()">Home</a></li>
+                        <li><a href="@routes.StaticPageController.help()">Help</a></li>
+                        <li><a href="#">Log in</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        @* And here's where we render the `Html` object containing
+         * the page content. *@
+        <div class="container">
+            @content
+        </div>
+
+        <footer class="footer">
+            <small>
+                The <a href="https://www.playframework.com/documentation/2.5.x/Home">Play Framework Document</a>
+            </small>
+            <nav>
+                <ul>
+                    <li><a href="@routes.StaticPageController.about()">About</a></li>
+                    <li><a href="@routes.StaticPageController.contact()">Contact</a></li>
+                </ul>
+            </nav>
+        </footer>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script data-main="@routes.Assets.versioned("javascripts/main.js")" src="@routes.Assets.versioned("lib/bootstrap/js/bootstrap.min.js")"></script>
+    </body>
+</html>
