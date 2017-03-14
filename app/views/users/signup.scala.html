@@ -1,4 +1,41 @@
+@import forms.CreateUserData
+@import helper._
+
+@(createUserForm: Form[CreateUserData])(implicit messages: Messages)
 @main(title = "Sign up") {
   <h1>Sign up</h1>
-  <p>This will be a signup page for new users.</p>
+
+  @if(createUserForm.hasErrors) {
+    <p>error was happend</p>
+    <ul>
+      @for(error <- createUserForm.errors) {
+        <li>@messages(error.messages, error.args)</li>
+      }
+    </ul>
+  }
+
+  @if(createUserForm.hasGlobalErrors) {
+    <p>global error was happend</p>
+    <ul>
+    @for(error <- createUserForm.globalErrors) {
+      <li>@messages(error.messages, error.args)</li>
+    }
+    </ul>
+  }
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      @form(action = routes.UsersController.create()) {
+        @inputText(createUserForm("name"),
+          '_label -> "Name", 'class -> "form-control", '_showConstraints -> false)
+        @inputText(createUserForm("email"),
+          'type -> "email", '_label -> "Email", 'class -> "form-control", '_showConstraints -> false)
+        @inputPassword(createUserForm("password"),
+          '_label -> "Password", 'class -> "form-control", '_showConstraints -> false)
+        @inputPassword(createUserForm("passwordConfirmation"),
+          '_label -> "Confirmation", 'class -> "form-control", '_showConstraints -> false)
+        <input type="submit" value="Create my account" class="btn btn-primary" />
+      }
+    </div>
+  </div>
 }
