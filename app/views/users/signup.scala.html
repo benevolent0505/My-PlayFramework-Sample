@@ -6,16 +6,15 @@
   <h1>Sign up</h1>
 
   @if(createUserForm.hasErrors) {
-    <p>error was happend</p>
-    <ul>
-      @for(error <- createUserForm.errors) {
-        <li>@messages(error.messages, error.args)</li>
-      }
-    </ul>
+    <div id="error_explanation" class="alert alert-danger" role="alert">
+      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+      <span class="sr-only">Error:</span>
+
+      The form contains @createUserForm.errors.size errors.
+    </div>
   }
 
   @if(createUserForm.hasGlobalErrors) {
-    <p>global error was happend</p>
     <ul>
     @for(error <- createUserForm.globalErrors) {
       <li>@messages(error.messages, error.args)</li>

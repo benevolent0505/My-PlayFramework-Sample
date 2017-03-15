@@ -1,4 +1,4 @@
-@(user: User)
+@(user: User)(implicit flash: Flash)
 
 @gravatarUrl(user: User) = @{
   val gravatarId = java.security.MessageDigest.getInstance("MD5")
@@ -7,6 +7,10 @@
 }
 
 @main(title = user.name) {
+  @if(flash.get("success").isDefined) {
+    <div class="alert alert-success">@flash.get("success").getOrElse("")</div>
+  }
+
   <div class="row">
     <aside class="col-md-4">
       <section class="user_info">

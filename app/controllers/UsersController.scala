@@ -16,7 +16,7 @@ class UsersController @Inject() (val messagesApi: MessagesApi)
 
   def index = ???
 
-  def show(id: Long) = Action {
+  def show(id: Long) = Action { implicit request =>
     Users.findById(id).map { user =>
       Ok(views.html.users.show(user))
     }.getOrElse(NotFound)
@@ -33,11 +33,13 @@ class UsersController @Inject() (val messagesApi: MessagesApi)
   def create() = Action { implicit request =>
     CreateUserForm.userForm.bindFromRequest.fold(
       errorForm => {
-        Ok(views.html.users.signup(errorForm))
+        // TODO: Redirect routes.UsersController.signup()
+        BadRequest(views.html.users.signup(errorForm))
       },
       user => {
         val created = Users.create(user.name, user.email, user.password)
         Redirect(routes.UsersController.show(created.id))
+          .flashing("success" -> "Welcome to the Sample App!")
       }
     )
   }
