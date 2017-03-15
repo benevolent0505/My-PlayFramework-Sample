@@ -7,10 +7,11 @@ lazy val root = (project in file(".")).enablePlugins(PlayScala)
 scalaVersion := "2.11.8"
 
 libraryDependencies ++= Seq(
-  "org.postgresql"  %  "postgresql"                   % "42.0.0",
-  "org.scalikejdbc" %% "scalikejdbc"                  % "2.5.0",
-  "org.scalikejdbc" %% "scalikejdbc-config"           % "2.5.0",
-  "org.scalikejdbc" %% "scalikejdbc-play-initializer" % "2.5.1",
+  "org.postgresql"  %  "postgresql"                     % "42.0.0",
+  "org.scalikejdbc" %% "scalikejdbc"                    % "2.5.0",
+  "org.scalikejdbc" %% "scalikejdbc-config"             % "2.5.0",
+  "org.scalikejdbc" %% "scalikejdbc-play-initializer"   % "2.5.1",
+  "org.scalikejdbc" %% "scalikejdbc-play-dbapi-adapter" % "2.5.1",
 
   "org.mindrot" % "jbcrypt" % "0.4",
 
@@ -19,3 +20,6 @@ libraryDependencies ++= Seq(
 
   "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.1" % Test
 )
+
+libraryDependencies += evolutions
+libraryDependencies += filters
